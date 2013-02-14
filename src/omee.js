@@ -1,18 +1,19 @@
+function omee(){};
 /**
  * Loads a particular URL.
  * @param url - The 
  * @param page -  A new page (_blank), parent page (_self).
  */
-function loadURL(url,page) {
+omee.loadURL=function(url,page) {
 	url=unescape(url);
 	window.open(url, "_self", false);
-}
+};
 
 /**
  * Loads an external javascript file into the page.
  * @param url - The url of the javascript file.
  */
-function loadScript(url) {
+omee.loadScript=function(url) {
 	// adding the script tag to the head as suggested before
 	var head = document.getElementsByTagName('head')[0];
 	var script = document.createElement('script');
@@ -35,7 +36,7 @@ function loadScript(url) {
  *            The function to be called back when response is received.
  * @param connType -
  */
-function raiseAjaxRequest(params, url, func, connType) {
+omee.raiseAjaxRequest=function(params, url, func, connType) {
 	var xmlhttp;
 	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp = new XMLHttpRequest();
@@ -73,7 +74,7 @@ function raiseAjaxRequest(params, url, func, connType) {
  * @param type - Type - div, span etc.
  * @returns 
  */
-function createElement(html,type) {
+omee.createElement=function(html,type) {
 	var element = document.createElement(type);
 	element.innerHTML = html;
 	return element;
@@ -86,7 +87,7 @@ function createElement(html,type) {
  * @param id
  * @returns
  */
-function element(id) {
+omee.element=function(id) {
 	var element = document.getElementById(id);
 	return element;
 }
@@ -99,7 +100,7 @@ function element(id) {
  * @param event - Event to be assigned.
  * @param func - The function to be called.
  */
-function assignEvent(id, event, func) {
+omee.assignEvent=function(id, event, func) {
 	var element = document.getElementById(id);
 	element.setAttribute(event, func);
 }
@@ -111,7 +112,7 @@ function assignEvent(id, event, func) {
  * @param id - The id of the select element.
  * @param value - The value to be selected.
  */
-function selectElement(id, value) {
+omee.selectElement=function(id, value) {
 	var selElement = element(id);
 	if (selElement != undefined) {
 		for ( var i = 0; i < selElement.options.length; i++) {
