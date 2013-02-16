@@ -148,7 +148,7 @@ omee.addcssjsfile = function(filename, filetype) {
  * Gets the parameters from url.
  * Can be accessed through params['paramname'];
  */
-omee.getUrlParams() = function {
+omee.getUrlParams = function {
 	  var params = {};
 	  window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str,key,value) {
 	    params[key] = value;
