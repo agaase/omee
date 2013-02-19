@@ -34,6 +34,8 @@ omee.loadScript=function(url) {
  *            The url of the request.
  * @param func -
  *            The function to be called back when response is received.
+ * 	      It can either be the fully qualified name of the function or te function itself.	
+ * 	
  * @param connType -
  */
 omee.raiseAjaxRequest=function(params, url, func, connType) {
@@ -45,18 +47,25 @@ omee.raiseAjaxRequest=function(params, url, func, connType) {
 	}
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			if (func.indexOf(".") > -1) {
-				var res = xmlhttp.responseText;
-
-				var str = func.substring(0, func.lastIndexOf("."));
-				var f = eval(str);
-				str = func.substring(func.lastIndexOf(".") + 1, func.length);
-				f[str](res);
-			} else {
-				var fn = window[func];
-
-				var resp = fn(xmlhttp.responseText);
-				return resp;
+			if(typeof(func)=="function"){
+				func(response);
+			}
+			else if(typeof(func)=="string"){
+				if (func.indexOf(".") > -1) {
+					var res = xmlhttp.responseText;
+					var str = func.substring(0, func.lastIndexOf("."));
+					var f = eval(str);
+					str = func.substring(func.lastIndexOf(".") + 1, func.length);
+					f[str](res);
+				} else {
+					var fn = window[func];
+	
+					var resp = fn(xmlhttp.responseText);
+					return resp;
+				}
+			}
+			else {
+				console.log("Undefined function type for callback.");
 			}
 		}
 	}
